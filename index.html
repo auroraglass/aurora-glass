@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aurora Glass</title>
+  <style>
+    /* Base styling */
+    body {
+      font-family: 'Courier New', Courier, monospace;
+      color: #e0e0e0;
+      background-color: #1c1c1c;
+      background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/CIA_logo.svg/800px-CIA_logo.svg.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 300px auto;
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    /* Make text container semi-transparent */
+    .content {
+      background-color: rgba(30, 30, 30, 0.85);
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #ff6666;
+      margin-bottom: 20px;
+    }
+
+    p, li {
+      margin-bottom: 12px;
+    }
+
+    /* Make it mobile friendly */
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+        background-size: 200px auto;
+      }
+      .content {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <h1>Aurora Glass</h1>
+    <p><strong>SUBJECT:</strong> C. F.<br>
+       <strong>AGE AT INTAKE:</strong> 14<br>
+       <strong>PROGRAM DESIGNATION:</strong> AURORA GLASS<br>
+       <strong>STATUS:</strong> REDACTED</p>
+
+    <h2>Abstract</h2>
+    <p>This document summarizes the intake, observation, and experimental outcomes associated with Subject C. F., enrolled under Program AURORA GLASS. The subject was identified through longitudinal data analysis targeting anomalous cognitive resilience in early-adolescent populations. Results indicate consistent deviation from established neurological and behavioral compliance models.</p>
+
+    <h2>Background</h2>
+    <p>On 14 March, Subject C. F. was flagged following cross-referenced academic records, pediatric evaluations, and behavioral telemetry. Indicators included advanced pattern anticipation, emotional regulation exceeding age norms, and resistance to authority-based suggestion during standardized youth assessments. Subject selection was justified by neural adaptability and limited external interference risk. Guardian authorization was obtained through federal research intermediaries. Subject was informed participation related to a “national youth aptitude initiative.” Full disclosure was restricted under Directive 7-A (Minors).</p>
+
+    <h2>Intake and Orientation</h2>
+    <p>Subject arrived at Facility ████ at 0712 hours. Initial demeanor was compliant but observant. Physiological readings remained stable. Orientation materials were delivered using juvenile protocol language. Subject interrupted orientation to ask: “If this is optional, why are the doors locked?” No response deviation was issued.</p>
+
+    <h2>Experiment Phase I: Cognitive Load Exposure</h2>
+    <p>Subject was exposed to escalating cognitive stressors including rapid sequencing tasks, conflicting audiovisual stimuli, and memory interference exercises. Average tolerance for comparable age groups is 6–9 minutes. Subject C. F. maintained task coherence for 21 minutes. At minute 15, subject began predicting stimulus order with statistically significant accuracy. Probability of chance alignment was ruled out after repetition.</p>
+
+    <h2>Experiment Phase II: Authority Compliance Trials</h2>
+    <p>Age-calibrated verbal suggestion scripts were administered. Subject was instructed to visualize controlled environments and describe emotional responses. When prompted to describe a “safe white room,” Subject paused and stated: “You already decided what I’m supposed to say.” Verbal participation ceased immediately thereafter. Session terminated.</p>
+
+    <h2>Behavioral Assessment</h2>
+    <p>Subject did not display expected regression behaviors associated with early adolescence. No requests for guardians, reassurance, or release were recorded. Sleep-cycle normalization occurred within 36 hours. Subject demonstrated repeated instances of environmental tracking, including staff rotation timing and procedural patterns, despite restricted sensory input. Evaluator note: “The subject does not respond to authority as a control mechanism. He appears to be assessing it.”</p>
+
+    <h2>Internal Ethics Memorandum (Restricted)</h2>
+    <p>Multiple staff raised concerns regarding continued experimentation on a minor demonstrating elevated meta-cognitive awareness. Recommendation to suspend escalation was approved but not implemented. Delay justification remains classified.</p>
+
+    <h2>Incident Report</h2>
+    <p>On ██ April at 0246 hours, Subject C. F. was observed awake, seated upright, and oriented toward the observation mirror. Vital signs normal. Without external prompt, Subject stated: “You’re waiting for me to fail. I’m waiting for you to admit what this is.” Audio feed terminated after 1.3 seconds.</p>
+
+    <h2>Conclusion</h2>
+    <p>Subject C. F. represents a critical anomaly within juvenile cognitive-control research parameters. Continued experimentation presents elevated risk of subject awareness exceeding containment thresholds. Subject status has been reassigned. Further documentation requires Level ███ clearance.</p>
+  </div>
+
+  <!-- Morse Code Background Script -->
+  <script>
+    // Morse code mapping
+    const morseCodeMap = {
+      "A": ".-", "B": "-...", "C": "-.-.", "D": "-..", "E": ".", 
+      "F": "..-.", "G": "--.", "H": "....", "I": "..", "J": ".---",
+      "K": "-.-", "L": ".-..", "M": "--", "N": "-.", "O": "---",
+      "P": ".--.", "Q": "--.-", "R": ".-.", "S": "...", "T": "-",
+      "U": "..-", "V": "...-", "W": ".--", "X": "-..-", "Y": "-.--",
+      "Z": "--..", " ": " "
+    };
+
+    const message = "CHARACTER UNDEFINED";
+
+    function textToMorse(text) {
+      return text.toUpperCase().split("").map(c => morseCodeMap[c] || "").join(" ");
+    }
+
+    const morseMessage = textToMorse(message);
+
+    // Setup Web Audio API
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playMorse(morse) {
+      let unit = 0.1; // time unit in seconds
+      let time = audioCtx.currentTime;
+
+      for (let char of morse) {
+        if (char === ".") {
+          beep(time, unit);
+          time += unit * 2;
+        } else if (char === "-") {
+          beep(time, unit * 3);
+          time += unit * 4;
+        } else if (char === " ") {
+          time += unit * 2;
+        }
+      }
+      setTimeout(() => playMorse(morse), (time - audioCtx.currentTime) * 1000 + 500);
+    }
+
+    function beep(startTime, duration) {
+      const oscillator = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+      oscillator.type = "sine";
+      oscillator.frequency.value = 600;
+      oscillator.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+      oscillator.start(startTime);
+      oscillator.stop(startTime + duration);
+    }
+
+    playMorse(morseMessage);
+  </script>
+</body>
+</html>
